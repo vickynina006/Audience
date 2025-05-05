@@ -1,20 +1,24 @@
 import { useState } from "react";
 import "./App.css";
-import Background from "./components/background";
-import GetStarted from "./components/getStarted";
-import Footer from "./components/footer";
-import Testimonial from "./components/testimonial";
+import HomePage from "./pages/home";
+import LoginPage from "./pages/loginPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUpPage from "./pages/signUpPage";
+import Dashboard from "./pages/dashboard";
 
+const router = createBrowserRouter([
+  { path: "/", element: <HomePage /> },
+  { path: "login", element: <LoginPage /> },
+  { path: "signup", element: <SignUpPage /> },
+  { path: "dashboard", element: <Dashboard /> },
+]);
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <Background />
-      <GetStarted />
-      <Testimonial />
-      <Footer />
-    </>
+    <RouterProvider router={router} />
+    // <>
+    //   <HomePage />
+    //   <LoginPage />
+    // </>
   );
 }
 

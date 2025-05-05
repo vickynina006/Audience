@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Header() {
@@ -6,16 +7,16 @@ export default function Header() {
       <img src={logo} alt="Logo" className=" w-32 h-10 md:w-[10rem] md:h-14" />
       <nav>
         <ul className="hidden items-center gap-5 text-[1.05rem] text-slate-100 lg:gap-7 mdx:flex">
-          <NavMenu title="Home" href="#home" />
-          <NavMenu title="About" href="#about" />
-          <NavMenu title="Services" href="" />
-          <NavMenu title="Contact" href="" />
+          <NavMenu title="Home" href="/" />
+          <NavMenu title="About" href="about" />
+          <NavMenu title="Services" href="services" />
+          <NavMenu title="Contact" href="contact" />
           <NavMenu
             title="Advertise"
-            href=""
+            href="advertise"
             style="px-4 py-2 outline outline-1 "
           />
-          <NavMenu title="Login/Sign up" href="" />
+          <NavMenu title="Login/Sign up" href="login" />
         </ul>
       </nav>
     </header>
@@ -25,9 +26,17 @@ export default function Header() {
 export function NavMenu({ href, title, style }) {
   return (
     <li>
-      <a href={href} className={`hover:text-[#c5eee4] ${style}`}>
+      <NavLink
+        to={href}
+        end
+        className={({ isActive }) =>
+          ` hover:text-[#c5eee4] ${style} ${
+            isActive ? "underline underline-offset-4" : "text-slate-100"
+          }`
+        }
+      >
         {title}
-      </a>
+      </NavLink>
     </li>
   );
 }

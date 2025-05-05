@@ -44,7 +44,7 @@ export default function Footer() {
             placeholder="Enter your email"
             className="w-[70%] py-1.5 px-3 rounded-md"
           />
-          <button className=" text-white w-[30%] bg-bgGreen3 rounded-md">
+          <button className=" text-white w-[30%] bg-bgGreen3 rounded-md hover:bg-textgreen">
             Suscribe
           </button>
         </form>
