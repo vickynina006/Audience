@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import {
+  Link,
+  redirect,
+  Form,
+  useFormAction,
+  useActionData,
+} from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "../components/button";
 import { Inputs } from "./loginPage";
+
 export default function SignUpPage() {
+  const data = useActionData();
   return (
     <section className="w-full bg-[url('/bg2.jpeg')] bg-cover bg-center bg-no-repeat ">
       <div className="pb-20 w-full h-full bg-[linear-gradient(to_bottom_left,rgba(118,185,119,0.9)_5%,rgba(118,185,119,0.87)_5%,rgba(5,6,6,0.9)_30%,rgba(5,6,6,0.99)_60%,rgba(5,6,6,1)_100%)] ">
@@ -17,9 +25,37 @@ export default function SignUpPage() {
           <h1 className="text-white text-2xl text-center md:text-3xl">
             Register
           </h1>
-          <form className="space-y-2">
-            <Inputs id="name" />
+          <Form className="space-y-2">
+            {/* {data && data.errors && (
+              <ul>
+                {Object.values(data.errors).map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )} */}
+            <Inputs id="username" />
+            <Inputs id="firstname" />
+            <Inputs id="lastname" />
             <Inputs />
+            <Inputs id="phone" />
+            <div className="flex items-center py-3">
+              {" "}
+              <label
+                htmlFor="gender"
+                className="text-slate-300 text-sm font-bold"
+              >
+                GENDER
+              </label>
+              <select
+                name="gender"
+                id="gender"
+                className="bg-neutral-700 mx-3 text-slate-300 rounded-md px-1 py-0.5"
+              >
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+                <option value="2">Others</option>
+              </select>
+            </div>
             <Inputs id="password" />
             <div className="space-y-2">
               <Button
@@ -36,9 +72,34 @@ export default function SignUpPage() {
                 </Link>
               </span>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </section>
   );
+}
+
+export async function action({ request }) {
+  const data = await request.formData();
+  signUpData = {
+    username: data.get("username"),
+    firstname: data.get("firstname"),
+    lastname: data.get("lastname"),
+    email: data.get("email"),
+    phone: data.get("phone"),
+    gender: data.get("gender"),
+    password: data.get("password"),
+  };
+  const response = await fetch(
+    "https://taskfund.onrender.com/api/Auth/SignUp",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(signUpData),
+    }
+  );
+  if (response.status === 500) {
+    return response;
+  }
+  return redirect("/");
 }
