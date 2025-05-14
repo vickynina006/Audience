@@ -2,15 +2,35 @@ import {
   Link,
   redirect,
   Form,
-  useFormAction,
   useActionData,
+  useLoaderData,
 } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "../components/button";
 import { Inputs } from "./loginPage";
+import GenderOptions, { AgeOptions } from "../components/selectOptions";
+import { useEffect, useState } from "react";
 
 export default function SignUpPage() {
+  const [countryId, setCountryId] = useState("");
+  const [state, setState] = useState([]);
   const data = useActionData();
+  const countries = useLoaderData();
+
+  useEffect(() => {
+    if (!countryId) return;
+    async function fetchStates() {
+      const response = await fetch(
+        `https://taskfund.onrender.com/Util/State/GetbyCountryId/ ${countryId}`
+      );
+
+      const statedata = await response.json();
+      console.log(statedata);
+      setState(statedata);
+    }
+    fetchStates();
+  }, [countryId]);
+
   return (
     <section className="w-full bg-[url('/bg2.jpeg')] bg-cover bg-center bg-no-repeat ">
       <div className="pb-20 w-full h-full bg-[linear-gradient(to_bottom_left,rgba(118,185,119,0.9)_5%,rgba(118,185,119,0.87)_5%,rgba(5,6,6,0.9)_30%,rgba(5,6,6,0.99)_60%,rgba(5,6,6,1)_100%)] ">
@@ -25,7 +45,7 @@ export default function SignUpPage() {
           <h1 className="text-white text-2xl text-center md:text-3xl">
             Register
           </h1>
-          <Form className="space-y-2">
+          <Form method="post" className="space-y-2">
             {/* {data && data.errors && (
               <ul>
                 {Object.values(data.errors).map((error) => (
@@ -33,29 +53,42 @@ export default function SignUpPage() {
                 ))}
               </ul>
             )} */}
-            <Inputs id="username" />
-            <Inputs id="firstname" />
-            <Inputs id="lastname" />
+            <Inputs id="userName" />
+            <Inputs id="firstName" />
+            <Inputs id="lastName" />
             <Inputs />
             <Inputs id="phone" />
-            <div className="flex items-center py-3">
+
+            <div className="py-4">
               {" "}
-              <label
-                htmlFor="gender"
-                className="text-slate-300 text-sm font-bold"
-              >
-                GENDER
-              </label>
               <select
-                name="gender"
-                id="gender"
-                className="bg-neutral-700 mx-3 text-slate-300 rounded-md px-1 py-0.5"
+                required
+                name="countryId"
+                id=""
+                className=" rounded-md px-1  "
+                value={countryId}
+                onChange={(event) => setCountryId(event.target.value)}
               >
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-                <option value="2">Others</option>
+                <option value="" disabled>
+                  --Select Country--
+                </option>
+                {countries.map((c) => (
+                  <option key={c.countryId} value={c.countryId}>
+                    {c.phonecode && `( +${c.phonecode} )`} {c.name}
+                  </option>
+                ))}
+              </select>
+              <select required name="stateId" className="mx-3  rounded-md px-1">
+                <option value="" disabled>
+                  --select state--
+                </option>
+                {/* {map states...} */}
               </select>
             </div>
+
+            <GenderOptions />
+            <AgeOptions />
+            <Inputs id="referalCode" required="" />
             <Inputs id="password" />
             <div className="space-y-2">
               <Button
@@ -65,7 +98,7 @@ export default function SignUpPage() {
               <span className="flex gap-1 text-sm">
                 <p className=" text-slate-300">Have an account already?</p>
                 <Link
-                  to="../login"
+                  to="/login"
                   className="text-bgGreen2 hover:underline cursor-pointer underline-offset-4"
                 >
                   Log in
@@ -81,14 +114,17 @@ export default function SignUpPage() {
 
 export async function action({ request }) {
   const data = await request.formData();
-  signUpData = {
-    username: data.get("username"),
-    firstname: data.get("firstname"),
-    lastname: data.get("lastname"),
+  const signUpData = {
+    userName: data.get("userName"),
+    firstName: data.get("firstName"),
+    lastName: data.get("lastName"),
     email: data.get("email"),
     phone: data.get("phone"),
     gender: data.get("gender"),
     password: data.get("password"),
+    ageBracket: data.get("ageBracket"),
+    countryId: data.get("countryId"),
+    stateId: data.get("stateId"),
   };
   const response = await fetch(
     "https://taskfund.onrender.com/api/Auth/SignUp",
@@ -98,8 +134,22 @@ export async function action({ request }) {
       body: JSON.stringify(signUpData),
     }
   );
-  if (response.status === 500) {
-    return response;
+  // console.log(response);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
   }
-  return redirect("/");
+  return redirect("/login");
+}
+
+export async function loader() {
+  const response = await fetch(
+    "https://taskfund.onrender.com/Util/Country/GetAll",
+    { headers: { "Content-Type": "application/json" } }
+  );
+  if (!response.ok) {
+    throw new Error("could not fetch countries");
+  }
+  const resdata = await response.json();
+
+  return resdata;
 }

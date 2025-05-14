@@ -28,7 +28,7 @@ export default function LoginPage() {
               <span className="flex gap-1 text-sm">
                 <p className=" text-slate-300">Need an account?</p>
                 <Link
-                  to="../signup"
+                  to="/signup"
                   className="text-bgGreen2 hover:underline cursor-pointer underline-offset-4"
                 >
                   Register
@@ -42,7 +42,7 @@ export default function LoginPage() {
   );
 }
 
-export function Inputs({ text, id = "email" }) {
+export function Inputs({ text, id = "email", required = "required" }) {
   return (
     <div className="flex flex-col gap-3 ">
       <label htmlFor={id} className="text-slate-300 text-sm font-bold">
@@ -52,7 +52,7 @@ export function Inputs({ text, id = "email" }) {
         type={id}
         id={id}
         name={id}
-        required
+        required={required}
         className="bg-[#1b1e1d] text-slate-300 rounded-md outline outline-1 outline-neutral-700 px-4 py-2"
       />
       <a className="text-bgGreen2 text-sm cursor-pointer hover:underline underline-offset-4">
