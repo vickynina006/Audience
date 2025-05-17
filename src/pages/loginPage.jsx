@@ -4,20 +4,20 @@ import Button from "../components/button";
 
 export default function LoginPage() {
   return (
-    <section className="w-full bg-[url('/bg2.jpeg')] bg-cover bg-center bg-no-repeat ">
-      <div className="pb-20 w-full h-full bg-[linear-gradient(to_bottom_left,rgba(118,185,119,0.9)_5%,rgba(118,185,119,0.87)_5%,rgba(5,6,6,0.9)_30%,rgba(5,6,6,0.99)_60%,rgba(5,6,6,1)_100%)] ">
-        <header className="flex items-center justify-between  px-8 py-10 md:px-16 lg:py-14 lg:px-24">
+    <section className="w-full  min-h-screen bg-[url('/bg2.jpeg')] bg-cover bg-center bg-no-repeat ">
+      <div className="pb-20 w-full min-h-screen bg-[linear-gradient(to_bottom_left,rgba(118,185,119,0.9)_5%,rgba(118,185,119,0.87)_5%,rgba(5,6,6,0.9)_30%,rgba(5,6,6,0.99)_60%,rgba(5,6,6,1)_100%)] ">
+        <header className="flex items-center pb-10 px-8 py-10 md:px-16 lg:py-14 lg:px-24">
           <img
             src={logo}
             alt="Logo"
             className=" w-32 h-10 md:w-[10rem] md:h-14"
           />
         </header>
-        <div className="bg-loginDarkash2 flex flex-col gap-5 p-6 rounded-lg  mx-10 md:mx-20 md:p-14 lg:mx-72">
+        <div className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg   md:w-[60%] md:p-14 lg:w-[50%]">
           <h1 className="text-white text-2xl text-center md:text-3xl">
             Welcome Back!
           </h1>
-          <form className="space-y-2">
+          <form className="space-y-2 ">
             <Inputs />
             <Inputs id="password" text="Forgot your password?" />
             <div className="space-y-2">
