@@ -8,6 +8,7 @@ import SignUpPage, {
   loader as countryLoader,
 } from "./pages/signUpPage";
 import Dashboard from "./pages/dashboard";
+import MoviePage, { pictureLoader } from "./pages/moviePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     loader: countryLoader,
   },
   { path: "dashboard", element: <Dashboard /> },
+  { path: "movie", element: <MoviePage />, loader: pictureLoader },
 ]);
 function App() {
   return (

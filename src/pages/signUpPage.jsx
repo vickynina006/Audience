@@ -21,7 +21,7 @@ export default function SignUpPage() {
     if (!countryId) return;
     async function fetchStates() {
       const response = await fetch(
-        `https://taskfund.onrender.com/Util/State/GetbyCountryId/ ${countryId}`
+        `https://taskfund.onrender.com/Util/State/GetbyCountryId/${countryId}`
       );
 
       const statedata = await response.json();
@@ -83,13 +83,17 @@ export default function SignUpPage() {
               {" "}
               <select
                 required
-                name="stateId"
+                name="id"
                 className="max-w-full  rounded-sm px-1"
               >
                 <option value="" disabled>
                   --select state--
                 </option>
-                {/* {map states...} */}
+                {state.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -131,7 +135,7 @@ export async function action({ request }) {
     password: data.get("password"),
     ageBracket: data.get("ageBracket"),
     countryId: data.get("countryId"),
-    stateId: data.get("stateId"),
+    id: data.get("id"),
   };
   const response = await fetch(
     "https://taskfund.onrender.com/api/Auth/SignUp",
