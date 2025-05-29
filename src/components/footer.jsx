@@ -1,7 +1,10 @@
 import logo from "../assets/logo.png";
 export default function Footer() {
   return (
-    <footer className="flex flex-col gap-8 bg-darkblue2 lg:gap-0 px-10 lg:px-20 py-20 lg:flex-row">
+    <footer
+      className="  flex flex-col gap-8 bg-darkblue2 lg:gap-0 px-10 lg:px-20 py-20 lg:flex-row"
+      id="footer"
+    >
       <div className="w-full flex flex-col gap-8 md:gap-0 md:flex-row lg:[60%]">
         <div className=" flex flex-col items-center w-full gap-4 lg:w-[35%]">
           <img
