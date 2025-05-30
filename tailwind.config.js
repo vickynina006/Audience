@@ -12,6 +12,19 @@ export default {
     },
 
     extend: {
+      keyframes: {
+        slide: {
+          "0%": { transform: "translateX(0%)" },
+          "33.33%": { transform: "translateX(0%)" },
+          "50%": { transform: "translateX(-100%)" },
+          "83.33%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(-200%)" },
+        },
+      },
+      animation: {
+        slide: "slide 12s infinite ease-in-out",
+      },
+
       fontFamily: {
         opensans: ["Open Sans", "sans-serif"],
       },

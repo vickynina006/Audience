@@ -2,7 +2,7 @@ export default function GetStartedCard2() {
   return (
     <div
       id="services"
-      className="flex flex-col items-center bg-bgblack px-10  gap-20 pt-36  pb-20 bg-left-glow "
+      className="flex flex-col items-center bg-bgblack px-10 gap-12  pb-20 bg-left-glow pt-24 md:gap-20"
     >
       <h1 className=" text-center font-semibold text-2xl md:text-3xl text-white">
         Who is This Strategy For?

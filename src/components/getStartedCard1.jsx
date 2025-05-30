@@ -3,7 +3,7 @@ import Button from "./button";
 export default function GetStartedCard1() {
   return (
     <div className="bg-bgblack  px-10 lg:px-44  py-20 bg-right-glow">
-      <div className="relative space-y-12  py-5 w-full">
+      <div className="relative space-y-12 pb-16 py-5 w-full">
         <div className="absolute right-0 top-0 w-6 h-6 border-t-2 border-r-2 border-textgreen"></div>
         <div className="absolute right-0 bottom-0 w-6  h-6 border-b-2 border-r-2 border-textgreen"></div>
         <div className="absolute left-0 -top-12 w-6 h-6 border-t-2 border-l-2 border-textgreen"></div>
