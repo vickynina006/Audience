@@ -26,11 +26,11 @@ export default function GetStartedCard1() {
               />
               <Rows
                 numberb="2"
-                description="Active Content:Generate engaging and relevant content for your audience."
+                description="Active Content: Generate engaging and relevant content for your audience."
               />
               <Rows
                 numberb="3"
-                description="Convert more Leads:Optimize your pages and landing pages for conversions"
+                description="Convert more Leads: Optimize your pages and landing pages for conversions"
               />
               <Rows
                 numberb="4"
