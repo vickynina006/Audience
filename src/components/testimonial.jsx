@@ -24,8 +24,8 @@ export default function Testimonial() {
 
 export function TestimonialDiv({ img, title, skill, description }) {
   return (
-    <div className="w-full  flex-shrink-0 md:p-10 flex bg-green-400 lg:w-[50%]">
-      <div className="w-[20%] bg-pink-400">
+    <div className="w-full  flex-shrink-0 md:p-10 flex  lg:w-[50%]">
+      <div className="w-[20%] ">
         <div className="w-14 h-14 bg-darkblue2  rounded-full overflow-hidden md:w-20 md:h-20">
           <img
             src={img}
@@ -34,7 +34,7 @@ export function TestimonialDiv({ img, title, skill, description }) {
           />
         </div>
       </div>
-      <div className="px-5 md:px-10 bg-red-700 space-y-5 w-[80%]">
+      <div className="px-5 md:px-10  space-y-5 w-[80%]">
         <h1 className="text-slate-100">
           {title} <span className="text-gray-300 text-xs">{skill} </span>
         </h1>
