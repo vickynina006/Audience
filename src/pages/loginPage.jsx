@@ -23,7 +23,7 @@ export default function LoginPage() {
           <div className="space-y-2">
             <Button
               title="Log In"
-              styles="py-0.5 px-7 mt-8 w-full rounded-md flex justify-center mx-auto "
+              styles="py-[0.18rem] px-7 text-sm mt-8 w-full rounded-md flex justify-center mx-auto "
             />
             <span className="flex gap-1 text-sm">
               <p className=" text-slate-300">Need an account?</p>

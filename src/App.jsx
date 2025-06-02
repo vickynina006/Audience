@@ -3,12 +3,9 @@ import "./App.css";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/loginPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUpPage, {
-  action as signUpAction,
-  loader as countryLoader,
-} from "./pages/signUpPage";
+import SignUpPage, { action as signUpAction } from "./pages/signUpPage";
+import { loader as countryLoader } from "./components/signupPage2";
 import Dashboard from "./pages/dashboard";
-import MoviePage, { pictureLoader } from "./pages/moviePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -20,7 +17,6 @@ const router = createBrowserRouter([
     loader: countryLoader,
   },
   { path: "dashboard", element: <Dashboard /> },
-  { path: "movie", element: <MoviePage />, loader: pictureLoader },
 ]);
 function App() {
   return (
