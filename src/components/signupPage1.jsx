@@ -1,8 +1,11 @@
 import { Inputs } from "./selectOptions";
 import Button from "./button";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Signup1Context } from "../store/signup1Context";
 
 export default function SignupPage1({ onClick }) {
+  const { isValid } = useContext(Signup1Context);
   return (
     <>
       <div className="flex w-full flex-col flex-wrap md:gap-[4%]   md:flex-row">
@@ -16,10 +19,10 @@ export default function SignupPage1({ onClick }) {
           <Inputs id="lastName" />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs />
+          <Inputs type="email" />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs id="phone" />
+          <Inputs id="phone" type="tel" />
         </div>
         <div className="w-full md:w-[48%]">
           <Inputs id="password" />
@@ -29,7 +32,10 @@ export default function SignupPage1({ onClick }) {
         <Button
           title="Next"
           onClick={onClick}
-          styles="py-0.5 px-7 rounded-md mt-8 w-full flex justify-center mx-auto "
+          disabled={!isValid}
+          styles={`py-0.5 px-7 rounded-md mt-8 w-full flex justify-center mx-auto ${
+            !isValid ? "opacity-50 cursor-not-allowed" : ""
+          } `}
         />
         <span className="flex gap-1 text-sm">
           <p className=" text-slate-300">Have an account already?</p>

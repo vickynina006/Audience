@@ -45,7 +45,7 @@ export default function GetStartedCard2() {
 }
 export function Box({ decription, icon }) {
   return (
-    <div className="flex bg-darkash shadow-sm min-h-52 shadow-slate-900 text-slate-300 flex-col rounded-md py-10 px-10 gap-5 w-64 md:w-[15.7`rem] lg:w-64 ">
+    <div className="flex bg-darkash shadow-sm min-h-52  shadow-slate-900 text-slate-300 flex-col rounded-md py-10 px-10 gap-5 max-w-64 md:w-[15.7`rem] lg:w-64 ">
       <div className="flex justify-center">
         <span className="bg-bgGreen3 flex justify-center items-center rounded-full text-slate-300 font-semibold w-9 h-9">
           {icon}

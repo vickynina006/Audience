@@ -3,9 +3,11 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import SignupPage1 from "../components/signupPage1";
 import SignupPage2 from "../components/signupPage2";
+// import { AnimatePresence, motion } from "framer-motion";
 
 export default function SignUpPage() {
   const [step, setStep] = useState(1);
+
   const totalSteps = 2;
   function next() {
     if (step < totalSteps) {
@@ -29,6 +31,7 @@ export default function SignUpPage() {
           className=" w-32 h-10 md:w-[10rem] md:h-14"
         />
       </header>
+
       <div className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg  lg:gap-10  md:w-[50%] md:p-8 lg:w-[35%]">
         <h1 className="text-white text-2xl text-center md:text-3xl">
           Register
@@ -71,7 +74,7 @@ export async function action({ request }) {
     password: data.get("password"),
     ageBracket: data.get("ageBracket"),
     countryId: data.get("countryId"),
-    id: data.get("id"),
+    stateId: data.get("id"),
   };
   const response = await fetch(
     "https://taskfund.onrender.com/api/Auth/SignUp",

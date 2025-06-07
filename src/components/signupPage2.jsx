@@ -1,19 +1,21 @@
 import Button from "./button";
 import { Link, useLoaderData } from "react-router-dom";
 import GenderOptions, { AgeOptions, Inputs } from "./selectOptions";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Signup1Context } from "../store/signup1Context";
 
 export default function SignupPage2({ onClick }) {
-  const [countryId, setCountryId] = useState(0);
+  // const [countryId, setCountryId] = useState(0);
+  const { formData, handlechange, isValid2 } = useContext(Signup1Context);
   const [state, setState] = useState([]);
 
   const countries = useLoaderData();
 
   useEffect(() => {
-    if (!countryId) return;
+    if (!formData.countryId) return;
     async function fetchStates() {
       const response = await fetch(
-        `https://taskfund.onrender.com/Util/State/GetbyCountryId/${countryId}`
+        `https://taskfund.onrender.com/Util/State/GetbyCountryId/${formData.countryId}`
       );
 
       const statedata = await response.json();
@@ -21,7 +23,7 @@ export default function SignupPage2({ onClick }) {
       setState(statedata);
     }
     fetchStates();
-  }, [countryId]);
+  }, [formData.countryId]);
 
   return (
     <>
@@ -45,8 +47,8 @@ export default function SignupPage2({ onClick }) {
               name="countryId"
               id="country"
               className=" bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1 w-full"
-              value={countryId}
-              onChange={(event) => setCountryId(event.target.value)}
+              value={formData.countryId}
+              onChange={handlechange}
             >
               <option value="" disabled className="">
                 --Select Country--
@@ -66,6 +68,8 @@ export default function SignupPage2({ onClick }) {
               STATE <span className="text-rose-500 ">*</span>
             </label>{" "}
             <select
+              // value={formData.stateId}
+              // onChange={handlechange}
               required
               name="id"
               id="state"
@@ -84,6 +88,27 @@ export default function SignupPage2({ onClick }) {
         </div>
       </div>
       <Inputs id="referalCode" required="required" />
+      <div className="flex items-center gap-2 text-sm text-slate-300 mt-4">
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          // checked={formData.term || ''}
+          // onChange={(e) =>
+          //   setFormData((prev) => ({
+          //     ...prev,
+          //     termsAccepted: e.target.checked,
+          //   }))
+          // }
+          onChange={handlechange}
+        />
+        <label htmlFor="terms">
+          By clicking, I agree to the{" "}
+          <a href="" className="text-bgGreen2 underline">
+            Terms and Conditions
+          </a>
+        </label>
+      </div>
       <div className="space-y-2">
         <div className="flex w-full gap-[8%]">
           <div className="w-[46%]">
@@ -98,7 +123,10 @@ export default function SignupPage2({ onClick }) {
             <Button
               title="Submit"
               type="submit"
-              styles="py-0.5 px-7 rounded-md mt-4 w-full "
+              disabled={!isValid2}
+              styles={`py-0.5 px-7 rounded-md mt-4 w-full ${
+                !isValid2 ? "opacity-50 cursor-not-allowed" : ""
+              } `}
             />
           </div>{" "}
         </div>

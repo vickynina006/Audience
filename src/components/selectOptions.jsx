@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { Signup1Context } from "../store/signup1Context";
 export default function GenderOptions() {
   return (
     <div className="flex flex-col gap-2  py-3">
@@ -61,19 +63,34 @@ export function AgeOptions() {
   );
 }
 
-export function Inputs({ text, id = "email", required = "required" }) {
+export function Inputs({
+  text,
+  type = "text",
+  id = "email",
+  required = "required",
+  ...props
+}) {
+  const { formData, handleChange, errors } = useContext(Signup1Context);
+
   return (
     <div className="flex flex-col gap-3 ">
       <label htmlFor={id} className="text-slate-300 text-xs font-bold">
         {id.toUpperCase()} <span className="text-rose-500">*</span>
       </label>
+
       <input
-        type={id}
+        type={type}
+        {...props}
         id={id}
         name={id}
         required={required}
+        value={formData[id] || ""}
+        // onChange={(e) => handleChange(id, e.target.value)}
+        onChange={handleChange}
         className="bg-[#1b1e1d] text-slate-300 rounded-md outline outline-1 outline-neutral-700 px-4 py-[0.02rem]"
       />
+      {/* {errors[id] && <p className="text-red-400 text-xs">{errors[id]}</p>} */}
+
       <a className="text-bgGreen2 text-xs cursor-pointer hover:underline underline-offset-4">
         {text}{" "}
       </a>
