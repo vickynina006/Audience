@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+const MotionButton = motion.button;
+
 export default function Button({
   href,
   title,
@@ -8,12 +11,12 @@ export default function Button({
 }) {
   return (
     <a href={href}>
-      <button
+      <MotionButton
         {...props}
         className={`outline outline-1 outline-slate-400 text-white ${styles} ${bg} hover:text-[#c5eee4] hover:outline-[#c5eee4]`}
       >
         {title}
-      </button>
+      </MotionButton>
     </a>
   );
 }

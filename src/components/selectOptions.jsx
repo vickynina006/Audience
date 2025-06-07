@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Signup1Context } from "../store/signup1Context";
 export default function GenderOptions() {
+  const { formData, handleChange } = useContext(Signup1Context);
   return (
     <div className="flex flex-col gap-2  py-3">
       {" "}
@@ -8,6 +9,8 @@ export default function GenderOptions() {
         GENDER <span className="text-rose-500">*</span>
       </label>
       <select
+        value={formData.gender}
+        onChange={handleChange}
         required
         name="gender"
         id="gender"
@@ -28,6 +31,7 @@ export default function GenderOptions() {
 }
 
 export function AgeOptions() {
+  const { formData, handleChange } = useContext(Signup1Context);
   return (
     <div className="flex flex-col w-full gap-2  py-3">
       {" "}
@@ -35,6 +39,8 @@ export function AgeOptions() {
         AGE <span className="text-rose-500">*</span>
       </label>
       <select
+        value={formData.ageBracket}
+        onChange={handleChange}
         required
         name="ageBracket"
         id="ageBracket"
@@ -67,7 +73,7 @@ export function Inputs({
   text,
   type = "text",
   id = "email",
-  required = "required",
+  required,
   ...props
 }) {
   const { formData, handleChange, errors } = useContext(Signup1Context);

@@ -12,8 +12,8 @@ export function Signup1Provider({ children }) {
     password: "",
     ageBracket: "",
     gender: "",
-    countryId: 0,
-    // stateId: "",
+    countryId: "",
+    stateId: "",
     terms: false,
   });
 
@@ -66,21 +66,24 @@ export function Signup1Provider({ children }) {
   function validateStep2() {
     const err = {};
     if (
-      !formData.ageBracket.trim() ||
-      !formData.gender.trim() ||
-      !formData.countryId.trim() ||
-      // !formData.stateId.trim() ||
+      !formData.ageBracket ||
+      !formData.gender ||
+      !formData.countryId ||
+      !formData.stateId ||
       !formData.terms
     ) {
       err.general = "All fields must be filled and terms ticked";
     }
 
     setErrors(err);
+
     return Object.keys(err).length === 0;
+    // return true;
   }
 
   useEffect(() => {
     setIsValid2(validateStep2());
+    // console.log("formData snapshot:", formData);
   }, [formData]);
   return (
     <Signup1Context.Provider

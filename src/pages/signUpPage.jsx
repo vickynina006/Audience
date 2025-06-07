@@ -3,7 +3,7 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import SignupPage1 from "../components/signupPage1";
 import SignupPage2 from "../components/signupPage2";
-// import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function SignUpPage() {
   const [step, setStep] = useState(1);
@@ -32,18 +32,12 @@ export default function SignUpPage() {
         />
       </header>
 
-      <div className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg  lg:gap-10  md:w-[50%] md:p-8 lg:w-[35%]">
+      {/* <div className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg  lg:gap-10  md:w-[50%] md:p-8 lg:w-[35%]">
         <h1 className="text-white text-2xl text-center md:text-3xl">
           Register
         </h1>
         <Form method="post" className="space-y-2">
-          {/* {data && data.errors && (
-              <ul>
-                {Object.values(data.errors).map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-            )} */}
+         
           {step === 1 && <SignupPage1 onClick={next} />}
           {step === 2 && <SignupPage2 onClick={back} />}
 
@@ -57,7 +51,36 @@ export default function SignUpPage() {
           </div>
           <p className="text-slate-300 text-sm text-end">Step {step}/2</p>
         </Form>
-      </div>
+      </div> */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={step}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.4 }}
+          className="bg-loginDarkash2 flex flex-col w-[80%] mx-auto gap-5 p-6 rounded-lg lg:gap-10 md:w-[50%] md:p-8 lg:w-[35%]"
+        >
+          <h1 className="text-white text-2xl text-center md:text-3xl">
+            Register
+          </h1>
+
+          <Form method="post" className="space-y-2">
+            {step === 1 && <SignupPage1 onClick={next} />}
+            {step === 2 && <SignupPage2 onClick={back} />}
+
+            <div className="flex justify-center py-4 gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-bgGreen2 "></span>
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${
+                  step >= 2 ? "bg-bgGreen2" : "bg-slate-300"
+                }`}
+              ></span>
+            </div>
+            <p className="text-slate-300 text-sm text-end">Step {step}/2</p>
+          </Form>
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

@@ -6,7 +6,7 @@ import { Signup1Context } from "../store/signup1Context";
 
 export default function SignupPage2({ onClick }) {
   // const [countryId, setCountryId] = useState(0);
-  const { formData, handlechange, isValid2 } = useContext(Signup1Context);
+  const { formData, handleChange, isValid2 } = useContext(Signup1Context);
   const [state, setState] = useState([]);
 
   const countries = useLoaderData();
@@ -19,7 +19,7 @@ export default function SignupPage2({ onClick }) {
       );
 
       const statedata = await response.json();
-      console.log(statedata);
+      // console.log(statedata);
       setState(statedata);
     }
     fetchStates();
@@ -47,8 +47,8 @@ export default function SignupPage2({ onClick }) {
               name="countryId"
               id="country"
               className=" bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1 w-full"
-              value={formData.countryId}
-              onChange={handlechange}
+              value={formData.countryId || ""}
+              onChange={handleChange}
             >
               <option value="" disabled className="">
                 --Select Country--
@@ -68,14 +68,13 @@ export default function SignupPage2({ onClick }) {
               STATE <span className="text-rose-500 ">*</span>
             </label>{" "}
             <select
-              // value={formData.stateId}
-              // onChange={handlechange}
+              onChange={handleChange}
               required
-              name="id"
+              name="stateId"
               id="state"
               className="w-full bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1"
             >
-              <option value="" disabled className="">
+              <option disabled className="">
                 --Select State--
               </option>
               {state.map((s) => (
@@ -87,7 +86,7 @@ export default function SignupPage2({ onClick }) {
           </div>
         </div>
       </div>
-      <Inputs id="referalCode" required="required" />
+      <Inputs id="referalCode" />
       <div className="flex items-center gap-2 text-sm text-slate-300 mt-4">
         <input
           type="checkbox"
@@ -100,7 +99,7 @@ export default function SignupPage2({ onClick }) {
           //     termsAccepted: e.target.checked,
           //   }))
           // }
-          onChange={handlechange}
+          onChange={handleChange}
         />
         <label htmlFor="terms">
           By clicking, I agree to the{" "}
