@@ -1,7 +1,7 @@
 import { Inputs } from "./selectOptions";
 import Button from "./button";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useContext } from "react";
 import { Signup1Context } from "../store/signup1Context";
 // import { motion } from "framer-motion";
@@ -32,6 +32,7 @@ export default function SignupPage1({ onClick }) {
       </div>
       <div className="space-y-2">
         <Button
+          type="button"
           animate={isValid ? { scale: [1, 0.97, 1] } : {}}
           transition={{ duration: 0.4 }}
           key={isValid}

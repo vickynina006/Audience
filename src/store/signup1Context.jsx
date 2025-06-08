@@ -14,6 +14,7 @@ export function Signup1Provider({ children }) {
     gender: "",
     countryId: "",
     stateId: "",
+    referalCode: "",
     terms: false,
   });
 
@@ -83,7 +84,7 @@ export function Signup1Provider({ children }) {
 
   useEffect(() => {
     setIsValid2(validateStep2());
-    // console.log("formData snapshot:", formData);
+    console.log("formData snapshot:", formData);
   }, [formData]);
   return (
     <Signup1Context.Provider

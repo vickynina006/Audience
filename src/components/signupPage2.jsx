@@ -78,7 +78,7 @@ export default function SignupPage2({ onClick }) {
                 --Select State--
               </option>
               {state.map((s) => (
-                <option key={s.id} value={s.id} className="">
+                <option key={s.id} value={s.id || ""} className="">
                   {s.name}
                 </option>
               ))}
@@ -120,6 +120,9 @@ export default function SignupPage2({ onClick }) {
           </div>
           <div className="w-[46%]">
             <Button
+              animate={isValid2 ? { scale: [1, 0.97, 1] } : {}}
+              transition={{ duration: 0.4 }}
+              key={isValid2}
               title="Submit"
               type="submit"
               disabled={!isValid2}

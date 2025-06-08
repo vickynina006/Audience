@@ -58,7 +58,7 @@ export default function SignUpPage() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.2 }}
           className="bg-loginDarkash2 flex flex-col w-[80%] mx-auto gap-5 p-6 rounded-lg lg:gap-10 md:w-[50%] md:p-8 lg:w-[35%]"
         >
           <h1 className="text-white text-2xl text-center md:text-3xl">
@@ -66,8 +66,14 @@ export default function SignUpPage() {
           </h1>
 
           <Form method="post" className="space-y-2">
-            {step === 1 && <SignupPage1 onClick={next} />}
-            {step === 2 && <SignupPage2 onClick={back} />}
+            <div className={step === 1 ? "block" : "hidden"}>
+              <SignupPage1 onClick={next} />
+            </div>
+            <div className={step === 2 ? "block" : "hidden"}>
+              <SignupPage2 onClick={back} />
+            </div>
+            {/* {step === 1 && <SignupPage1 onClick={next} />}
+            {step === 2 && <SignupPage2 onClick={back} />} */}
 
             <div className="flex justify-center py-4 gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-bgGreen2 "></span>
@@ -97,8 +103,10 @@ export async function action({ request }) {
     password: data.get("password"),
     ageBracket: data.get("ageBracket"),
     countryId: data.get("countryId"),
-    stateId: data.get("id"),
+    stateId: data.get("stateId"),
+    referalCode: data.get("referalCode"),
   };
+  console.log("actiondata:", signUpData);
   const response = await fetch(
     "https://taskfund.onrender.com/api/Auth/SignUp",
     {
@@ -107,7 +115,7 @@ export async function action({ request }) {
       body: JSON.stringify(signUpData),
     }
   );
-  // console.log(response);
+  console.log(response);
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
