@@ -3,7 +3,7 @@ import "./App.css";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/loginPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUpPage, { action as signUpAction } from "./pages/signUpPage";
+import SignUpPage from "./pages/signUpPage";
 import { loader as countryLoader } from "./components/signupPage2";
 import Dashboard from "./pages/dashboard";
 import { Signup1Provider } from "./store/signup1Context";
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         <SignUpPage />
       </Signup1Provider>
     ),
-    action: signUpAction,
+    // action: signUpAction,
     loader: countryLoader,
   },
   { path: "dashboard", element: <Dashboard /> },

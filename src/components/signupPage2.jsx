@@ -47,7 +47,7 @@ export default function SignupPage2({ onClick }) {
               name="countryId"
               id="country"
               className=" bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1 w-full"
-              value={formData.countryId || ""}
+              value={formData.countryId}
               onChange={handleChange}
             >
               <option value="" disabled className="">
@@ -71,6 +71,7 @@ export default function SignupPage2({ onClick }) {
               onChange={handleChange}
               required
               name="stateId"
+              value={formData.stateId}
               id="state"
               className="w-full bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1"
             >
@@ -78,7 +79,7 @@ export default function SignupPage2({ onClick }) {
                 --Select State--
               </option>
               {state.map((s) => (
-                <option key={s.id} value={s.id || ""} className="">
+                <option key={s.id} value={s.id} className="">
                   {s.name}
                 </option>
               ))}
@@ -92,7 +93,7 @@ export default function SignupPage2({ onClick }) {
           type="checkbox"
           id="terms"
           name="terms"
-          // checked={formData.term || ''}
+          checked={formData.terms}
           // onChange={(e) =>
           //   setFormData((prev) => ({
           //     ...prev,

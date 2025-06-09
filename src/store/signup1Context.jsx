@@ -71,7 +71,7 @@ export function Signup1Provider({ children }) {
       !formData.gender ||
       !formData.countryId ||
       !formData.stateId ||
-      !formData.terms
+      formData.terms !== true
     ) {
       err.general = "All fields must be filled and terms ticked";
     }
@@ -84,7 +84,7 @@ export function Signup1Provider({ children }) {
 
   useEffect(() => {
     setIsValid2(validateStep2());
-    console.log("formData snapshot:", formData);
+    // console.log("formData snapshot:", formData);
   }, [formData]);
   return (
     <Signup1Context.Provider
