@@ -25,7 +25,7 @@ export default function SignUpPage() {
   }
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Submitting formData:", formData);
+    // console.log("Submitting formData:", formData);
     const response = await fetch(
       "https://taskfund.onrender.com/api/Auth/SignUp",
       {
@@ -65,14 +65,14 @@ export default function SignUpPage() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-2">
-            <div className={step === 1 ? "block" : "hidden"}>
+            {/* <div className={step === 1 ? "block" : "hidden"}>
               <SignupPage1 onClick={next} />
             </div>
             <div className={step === 2 ? "block" : "hidden"}>
               <SignupPage2 onClick={back} />
-            </div>
-            {/* {step === 1 && <SignupPage1 onClick={next} />}
-            {step === 2 && <SignupPage2 onClick={back} />} */}
+            </div> */}
+            {step === 1 && <SignupPage1 onClick={next} />}
+            {step === 2 && <SignupPage2 onClick={back} />}
 
             <div className="flex justify-center py-4 gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-bgGreen2 "></span>

@@ -84,18 +84,24 @@ export function Signup1Provider({ children }) {
 
   useEffect(() => {
     setIsValid2(validateStep2());
-    // console.log("formData snapshot:", formData);
+    console.log("formData snapshot:", formData);
   }, [formData]);
+
+  function updateStateData(update) {
+    setFormData((prev) => ({ ...prev, ...update }));
+  }
   return (
     <Signup1Context.Provider
       value={{
         formData,
+        setFormData,
         errors,
         handleChange,
         validateStep1,
         validateStep2,
         isValid,
         isValid2,
+        updateStateData,
       }}
     >
       {children}

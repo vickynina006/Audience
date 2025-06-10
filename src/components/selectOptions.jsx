@@ -16,7 +16,7 @@ export default function GenderOptions() {
         id="gender"
         className=" bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-md px-1 py-[0.02rem] w-full"
       >
-        <option value="" className=" ">
+        <option value="" disabled className=" ">
           --Select Gender--
         </option>
         <option value="0" className=" ">
@@ -46,7 +46,7 @@ export function AgeOptions() {
         id="ageBracket"
         className=" bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-md px-1 py-[0.02rem] w-full"
       >
-        <option value="" className=" ">
+        <option value="" disabled className=" ">
           --Select Age--
         </option>
         <option value="0" className=" ">

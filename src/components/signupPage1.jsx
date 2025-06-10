@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import { motion } from "framer-motion";
 import { useContext } from "react";
 import { Signup1Context } from "../store/signup1Context";
+import { scale, spring } from "framer-motion";
 // import { motion } from "framer-motion";
 
 export default function SignupPage1({ onClick }) {
@@ -33,8 +34,9 @@ export default function SignupPage1({ onClick }) {
       <div className="space-y-2">
         <Button
           type="button"
-          animate={isValid ? { scale: [1, 0.97, 1] } : {}}
-          transition={{ duration: 0.4 }}
+          initial={{ scale: isValid ? 0.97 : 1 }}
+          animate={{ scale: isValid ? 1 : 1 }}
+          transition={{ duration: 1, type: "spring", bounce: 0.7 }}
           key={isValid}
           title="Next"
           onClick={onClick}

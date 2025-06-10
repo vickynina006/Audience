@@ -6,21 +6,23 @@ import { Signup1Context } from "../store/signup1Context";
 
 export default function SignupPage2({ onClick }) {
   // const [countryId, setCountryId] = useState(0);
-  const { formData, handleChange, isValid2 } = useContext(Signup1Context);
+  const { formData, handleChange, isValid2, updateStateData } =
+    useContext(Signup1Context);
   const [state, setState] = useState([]);
 
   const countries = useLoaderData();
 
   useEffect(() => {
     if (!formData.countryId) return;
+
     async function fetchStates() {
       const response = await fetch(
         `https://taskfund.onrender.com/Util/State/GetbyCountryId/${formData.countryId}`
       );
-
       const statedata = await response.json();
       // console.log(statedata);
       setState(statedata);
+      updateStateData({ stateId: "" });
     }
     fetchStates();
   }, [formData.countryId]);
@@ -75,11 +77,11 @@ export default function SignupPage2({ onClick }) {
               id="state"
               className="w-full bg-[#1b1e1d] outline outline-1 outline-neutral-700 text-slate-300 rounded-sm px-1"
             >
-              <option disabled className="">
+              <option disabled value="">
                 --Select State--
               </option>
               {state.map((s) => (
-                <option key={s.id} value={s.id} className="">
+                <option key={s.id} value={s.id}>
                   {s.name}
                 </option>
               ))}
@@ -121,8 +123,9 @@ export default function SignupPage2({ onClick }) {
           </div>
           <div className="w-[46%]">
             <Button
-              animate={isValid2 ? { scale: [1, 0.97, 1] } : {}}
-              transition={{ duration: 0.4 }}
+              initial={{ scale: isValid2 ? 0.97 : 1 }}
+              animate={{ scale: isValid2 ? 1 : 1 }}
+              transition={{ duration: 1, type: "spring", bounce: 0.7 }}
               key={isValid2}
               title="Submit"
               type="submit"
