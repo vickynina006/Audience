@@ -89,7 +89,7 @@ export default function SignupPage2({ onClick }) {
           </div>
         </div>
       </div>
-      <Inputs id="referalCode" />
+      <Inputs id="referalCode" onChange={handleChange} />
       <div className="flex items-center gap-2 text-sm text-slate-300 mt-4">
         <input
           type="checkbox"

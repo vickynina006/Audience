@@ -25,13 +25,14 @@ export default function SignUpPage() {
   }
   async function handleSubmit(e) {
     e.preventDefault();
+    const { terms, ...neededData } = formData;
     // console.log("Submitting formData:", formData);
     const response = await fetch(
       "https://taskfund.onrender.com/api/Auth/SignUp",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(neededData),
       }
     );
     console.log(response);

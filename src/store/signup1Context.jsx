@@ -30,7 +30,15 @@ export function Signup1Provider({ children }) {
     const { name, value, checked, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : name === "ageBracket" ||
+            name === "countryId" ||
+            name === "stateId" ||
+            name === "gender"
+          ? Number(value)
+          : value,
     }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   }
@@ -66,11 +74,14 @@ export function Signup1Provider({ children }) {
 
   function validateStep2() {
     const err = {};
+    function isEmpty(value) {
+      return value === null || value === undefined || value === "";
+    }
     if (
-      !formData.ageBracket ||
-      !formData.gender ||
-      !formData.countryId ||
-      !formData.stateId ||
+      isEmpty(formData.ageBracket) ||
+      isEmpty(formData.gender) ||
+      isEmpty(formData.countryId) ||
+      isEmpty(formData.stateId) ||
       formData.terms !== true
     ) {
       err.general = "All fields must be filled and terms ticked";

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Signup1Context } from "../store/signup1Context";
+
 export default function GenderOptions() {
   const { formData, handleChange } = useContext(Signup1Context);
   return (
@@ -19,12 +20,8 @@ export default function GenderOptions() {
         <option value="" disabled className=" ">
           --Select Gender--
         </option>
-        <option value="0" className=" ">
-          Male
-        </option>
-        <option value="1" className=" ">
-          Female
-        </option>
+        <option value="0">Male</option>
+        <option value="1">Female</option>
       </select>
     </div>
   );
@@ -76,7 +73,7 @@ export function Inputs({
   required,
   ...props
 }) {
-  const { formData, handleChange, errors } = useContext(Signup1Context);
+  const { formData } = useContext(Signup1Context);
 
   return (
     <div className="flex flex-col gap-3 ">
@@ -90,9 +87,9 @@ export function Inputs({
         id={id}
         name={id}
         required={required}
-        value={formData[id] || ""}
+        value={formData[id]}
         // onChange={(e) => handleChange(id, e.target.value)}
-        onChange={handleChange}
+
         className="bg-[#1b1e1d] text-slate-300 rounded-md outline outline-1 outline-neutral-700 px-4 py-[0.02rem]"
       />
       {/* {errors[id] && <p className="text-red-400 text-xs">{errors[id]}</p>} */}

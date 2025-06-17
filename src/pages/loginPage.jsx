@@ -18,7 +18,7 @@ export default function LoginPage() {
           Welcome Back!
         </h1>
         <form className="space-y-2 ">
-          <Inputs />
+          <Inputs id="userName" />
           <Inputs id="password" text="Forgot your password?" />
           <div className="space-y-2">
             <Button

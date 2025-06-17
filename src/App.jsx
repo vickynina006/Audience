@@ -13,11 +13,7 @@ const router = createBrowserRouter([
   { path: "login", element: <LoginPage /> },
   {
     path: "signup",
-    element: (
-      <Signup1Provider>
-        <SignUpPage />
-      </Signup1Provider>
-    ),
+    element: <SignUpPage />,
     // action: signUpAction,
     loader: countryLoader,
   },
@@ -25,7 +21,10 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <RouterProvider router={router} />
+    <Signup1Provider>
+      <RouterProvider router={router} />
+    </Signup1Provider>
+
     // <>
     //   <HomePage />
     //   <LoginPage />

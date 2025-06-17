@@ -4,31 +4,30 @@ import { Link } from "react-router-dom";
 // import { motion } from "framer-motion";
 import { useContext } from "react";
 import { Signup1Context } from "../store/signup1Context";
-import { scale, spring } from "framer-motion";
-// import { motion } from "framer-motion";
+// import { scale, spring } from "framer-motion";
 
 export default function SignupPage1({ onClick }) {
-  const { isValid } = useContext(Signup1Context);
+  const { isValid, handleChange } = useContext(Signup1Context);
   return (
     <>
       <div className="flex w-full flex-col flex-wrap md:gap-[4%]   md:flex-row">
         <div className="w-full md:w-[48%]">
-          <Inputs id="userName" />
+          <Inputs id="userName" onChange={handleChange} />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs id="firstName" />
+          <Inputs id="firstName" onChange={handleChange} />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs id="lastName" />
+          <Inputs id="lastName" onChange={handleChange} />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs type="email" />
+          <Inputs type="email" onChange={handleChange} />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs id="phone" type="tel" />
+          <Inputs id="phone" type="tel" onChange={handleChange} />
         </div>
         <div className="w-full md:w-[48%]">
-          <Inputs id="password" />
+          <Inputs id="password" onChange={handleChange} />
         </div>
       </div>
       <div className="space-y-2">
