@@ -10,6 +10,7 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const { formData } = useContext(Signup1Context);
   const [step, setStep] = useState(1);
+  const [signupError, setSignupError] = useState("");
 
   const totalSteps = 2;
   function next() {
@@ -27,19 +28,25 @@ export default function SignUpPage() {
     e.preventDefault();
     const { terms, ...neededData } = formData;
     // console.log("Submitting formData:", formData);
-    const response = await fetch(
-      "https://taskfund.onrender.com/api/Auth/SignUp",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(neededData),
+    try {
+      const response = await fetch(
+        "https://taskfund.onrender.com/api/Auth/SignUp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(neededData),
+        }
+      );
+      console.log(response);
+      const resdata = await response.json();
+      if (!response.ok) {
+        const errMsg = resdata.message || "Something went wrong";
+        throw new Error(errMsg);
       }
-    );
-    console.log(response);
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
+      return navigate("/login");
+    } catch (err) {
+      setSignupError(err.message || "network failure, try again later");
     }
-    return navigate("/login");
   }
 
   return (
@@ -66,6 +73,7 @@ export default function SignUpPage() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-2">
+            <p className="text-red-500 my-4">{signupError}</p>
             {/* <div className={step === 1 ? "block" : "hidden"}>
               <SignupPage1 onClick={next} />
             </div>

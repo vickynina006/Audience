@@ -40,7 +40,7 @@ export function Signup1Provider({ children }) {
           ? Number(value)
           : value,
     }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+    // setErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
   function validateStep1() {
