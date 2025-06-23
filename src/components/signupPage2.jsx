@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import GenderOptions, { AgeOptions, Inputs } from "./selectOptions";
 import { useContext, useEffect, useState } from "react";
 import { Signup1Context } from "../store/signup1Context";
+import Spinner from "../components/spinner";
 
 export default function SignupPage2({ onClick }) {
   // const [countryId, setCountryId] = useState(0);
@@ -137,6 +138,7 @@ export default function SignupPage2({ onClick }) {
               title={isLoading ? "Submitting..." : "Submit"}
               type="submit"
               disabled={!isValid2 || isLoading}
+              spinner={isLoading && <Spinner />}
               onClick={handleclick}
               styles={`py-0.5 px-7 rounded-md mt-4 w-full ${
                 !isValid2 || isLoading ? "opacity-50 cursor-not-allowed" : ""
