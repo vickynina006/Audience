@@ -17,7 +17,7 @@ export function Signup1Provider({ children }) {
     referalCode: "",
     terms: false,
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [isValid2, setIsValid2] = useState(false);
@@ -42,7 +42,9 @@ export function Signup1Provider({ children }) {
     }));
     // setErrors((prev) => ({ ...prev, [name]: "" }));
   }
-
+  function handleclick() {
+    setIsLoading(true);
+  }
   function validateStep1() {
     const err = {};
     if (!formData.userName.trim()) {
@@ -113,6 +115,9 @@ export function Signup1Provider({ children }) {
         isValid,
         isValid2,
         updateStateData,
+        handleclick,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

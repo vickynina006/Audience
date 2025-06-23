@@ -8,7 +8,7 @@ import { Signup1Context } from "../store/signup1Context";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const { formData } = useContext(Signup1Context);
+  const { formData, setIsLoading } = useContext(Signup1Context);
   const [step, setStep] = useState(1);
   const [signupError, setSignupError] = useState("");
 
@@ -46,6 +46,7 @@ export default function SignUpPage() {
       return navigate("/login");
     } catch (err) {
       setSignupError(err.message || "network failure, try again later");
+      setIsLoading(false);
     }
   }
 

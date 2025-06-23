@@ -2,14 +2,19 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "../components/button";
 import { useState } from "react";
+import Spinner from "../components/spinner";
 
 export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     userName: "",
     password: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  function handleclick() {
+    setIsLoading(true);
+  }
 
   function handleLoginChange(e) {
     const { name, value } = e.target;
@@ -18,6 +23,7 @@ export default function LoginPage() {
       [name]: value,
     }));
   }
+
   async function handleLoginSubmit(e) {
     e.preventDefault();
     const { userName, password } = loginData;
@@ -34,8 +40,7 @@ export default function LoginPage() {
         }
       );
       const resdata = await response.json();
-      const token = resdata.token;
-      localStorage.setItem("token", token);
+
       if (!response.ok) {
         console.error("backend error:", resdata);
         const errorMsg =
@@ -43,10 +48,13 @@ export default function LoginPage() {
         throw new Error(errorMsg);
       }
 
+      const token = resdata.token;
+      localStorage.setItem("token", token);
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
       setError(err.message || "network error, please try again");
+      setIsLoading(false);
     }
   }
 
@@ -63,6 +71,7 @@ export default function LoginPage() {
         <h1 className="text-white text-2xl text-center mb-3 md:text-3xl">
           Welcome Back!
         </h1>
+
         <form onSubmit={handleLoginSubmit} className="space-y-2 ">
           {/* {error &&
             error.map((err, i) => (
@@ -85,8 +94,13 @@ export default function LoginPage() {
           />
           <div className="space-y-2">
             <Button
-              title="Log In"
-              styles="py-[0.18rem] px-7 text-sm mt-8 w-full rounded-md flex justify-center mx-auto "
+              title={isLoading ? "Logging In..." : "Log In"}
+              styles={`py-[0.18rem] px-7 text-sm mt-8 w-full rounded-md flex justify-center mx-auto ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={handleclick}
+              disabled={isLoading}
+              spinner={isLoading && <Spinner />}
             />
             <span className="flex gap-1 text-sm">
               <p className=" text-slate-300">Need an account?</p>

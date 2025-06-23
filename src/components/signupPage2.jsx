@@ -6,8 +6,15 @@ import { Signup1Context } from "../store/signup1Context";
 
 export default function SignupPage2({ onClick }) {
   // const [countryId, setCountryId] = useState(0);
-  const { formData, handleChange, isValid2, updateStateData } =
-    useContext(Signup1Context);
+  const {
+    formData,
+    handleChange,
+    isValid2,
+    updateStateData,
+    isLoading,
+    handleclick,
+  } = useContext(Signup1Context);
+
   const [state, setState] = useState([]);
 
   const countries = useLoaderData();
@@ -127,11 +134,12 @@ export default function SignupPage2({ onClick }) {
               animate={{ scale: isValid2 ? 1 : 1 }}
               transition={{ duration: 1, type: "spring", bounce: 0.7 }}
               key={isValid2}
-              title="Submit"
+              title={isLoading ? "Submitting..." : "Submit"}
               type="submit"
-              disabled={!isValid2}
+              disabled={!isValid2 || isLoading}
+              onClick={handleclick}
               styles={`py-0.5 px-7 rounded-md mt-4 w-full ${
-                !isValid2 ? "opacity-50 cursor-not-allowed" : ""
+                !isValid2 || isLoading ? "opacity-50 cursor-not-allowed" : ""
               } `}
             />
           </div>{" "}

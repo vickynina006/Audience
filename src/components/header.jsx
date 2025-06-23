@@ -10,10 +10,10 @@ export default function Header() {
   }
 
   const spanStyle =
-    "w-6 h-[3px] bg-slate-200 rounded-sm transition duration-500 ease-in-out";
+    "w-6 h-[3px] bg-slate-200 rounded-sm transition-all duration-300 ease-in-out";
 
   return (
-    <header className="flex items-center justify-between  px-8 pt-10 pb-10 md:px-16 lg:pt-11 lg:pb-4  lgx:px-24">
+    <header className="flex items-center  justify-between fixed top-0 left-0 right-0 px-8 py-10  md:px-16    lgx:px-24">
       <img src={logo} alt="Logo" className=" w-32 h-10 md:w-[10rem] md:h-14" />
       <nav>
         <ul className="hidden items-center gap-5 text-[1.05rem] text-slate-100 lg:gap-7 mdx:flex">
@@ -25,17 +25,17 @@ export default function Header() {
           <NavMenu
             title="Advertise"
             to="advertise"
-            style="px-4 py-2 outline outline-1 "
+            styles="px-4 py-2 outline outline-1 "
           />
           <NavMenu title="Login/Sign up" to="login" />
         </ul>
-        <ul className="flex gap-10 items-center text-[1.05rem] text-slate-100">
+        <ul className="flex gap-10 items-center text-[1.2rem] text-slate-100">
           <div className="hidden  md:flex mdx:hidden">
             {" "}
             <NavMenu
               title="Advertise"
               to="advertise"
-              style="px-4 py-2 outline outline-1 "
+              styles="px-4 py-2 outline outline-1 "
             />
           </div>
           <div
@@ -53,21 +53,22 @@ export default function Header() {
             ></span>
           </div>
         </ul>
-        {isOpen && <NavModal />}
+
+        <NavModal translate={isOpen ? "translate-x-0" : "-translate-x-full"} />
       </nav>
     </header>
   );
 }
 
-export function NavMenu({ to, title, style }) {
+export function NavMenu({ to, title, styles, textcl = "text-slate-100" }) {
   return (
     <li>
       <NavLink
         to={to}
         end
         className={({ isActive }) =>
-          ` hover:text-[#c5eee4] ${style} ${
-            isActive ? "underline underline-offset-4" : "text-slate-100"
+          ` hover:text-[#c5eee4] ${styles} ${
+            isActive ? "underline underline-offset-4" : textcl
           }`
         }
       >
@@ -77,10 +78,10 @@ export function NavMenu({ to, title, style }) {
   );
 }
 
-export function NavMenu2({ href, title }) {
+export function NavMenu2({ href, title, style = "text-slate-100" }) {
   return (
     <li>
-      <a href={href} className="text-slate-100 hover:text-[#c5eee4]">
+      <a href={href} className={`${style} hover:text-[#c5eee4]`}>
         {title}
       </a>
     </li>

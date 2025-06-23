@@ -4,7 +4,7 @@ import Button from "./button";
 
 export default function HeroSection() {
   return (
-    <section className="flex flex-col-reverse  mdx:flex-row lg:pl-20 ">
+    <section className="flex flex-col-reverse pt-20 mdx:flex-row lg:pl-20 ">
       <div className="flex flex-col w-full my-auto pr-6 pl-6 space-y-7 pt-20 lg:pt-0 lg:w-[50%] lg-pr-36">
         <h1 className=" text-center text-white text-3xl font-semibold leading-10 md:leading-normal md:text-4xl lg:text-start">
           <span className=" text-textgreen text-[2rem] md:text-[2.6rem]">
