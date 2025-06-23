@@ -141,7 +141,7 @@ export default function SignupPage2({ onClick }) {
               spinner={isLoading && <Spinner />}
               onClick={handleclick}
               styles={`py-0.5 px-7 rounded-md mt-4 w-full ${
-                !isValid2 || isLoading ? "opacity-50 cursor-not-allowed" : ""
+                !isValid2 || isLoading ? "opacity-40 cursor-not-allowed" : ""
               } `}
             />
           </div>{" "}

@@ -1,28 +1,43 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "../components/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../components/spinner";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const [loginData, setLoginData] = useState({
     userName: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const [inputError, setInputError] = useState(true);
   const navigate = useNavigate();
+
   function handleclick() {
     setIsLoading(true);
   }
 
+  function handleNavigation() {
+    setIsNavigating(true);
+  }
   function handleLoginChange(e) {
     const { name, value } = e.target;
     setLoginData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    setError("");
   }
+  useEffect(() => {
+    if (!loginData.userName.trim() || !loginData.password.trim()) {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
+  }, [loginData]);
 
   async function handleLoginSubmit(e) {
     e.preventDefault();
@@ -67,53 +82,69 @@ export default function LoginPage() {
           className=" w-32 h-10 md:w-[10rem] md:h-14"
         />
       </header>
-      <div className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg   md:w-[50%] md:p-10 lg:w-[30%]">
-        <h1 className="text-white text-2xl text-center mb-3 md:text-3xl">
-          Welcome Back!
-        </h1>
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.5 }}
+          className="bg-loginDarkash2 flex flex-col  w-[80%] mx-auto gap-5 p-6 rounded-lg   md:w-[50%] md:p-10 lg:w-[30%]"
+        >
+          <h1 className="text-white text-2xl text-center mb-3 md:text-3xl">
+            Welcome Back!
+          </h1>
 
-        <form onSubmit={handleLoginSubmit} className="space-y-2 ">
-          {/* {error &&
+          <form onSubmit={handleLoginSubmit} className="space-y-2 ">
+            {/* {error &&
             error.map((err, i) => (
               <p key={i} className="text-red-500 my-4">
                 {err}
               </p>
             ))} */}
-          <p className="text-red-500 my-4">{error}</p>
+            <p className="text-red-500 my-4">{error}</p>
 
-          <Input
-            id="userName"
-            onChange={handleLoginChange}
-            value={loginData.userName}
-          />
-          <Input
-            value={loginData.password}
-            id="password"
-            text="Forgot your password?"
-            onChange={handleLoginChange}
-          />
-          <div className="space-y-2">
-            <Button
-              title={isLoading ? "Logging In..." : "Log In"}
-              styles={`py-[0.18rem] px-7 text-sm mt-8 w-full rounded-md flex justify-center mx-auto ${
-                isLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleclick}
-              disabled={isLoading}
-              spinner={isLoading && <Spinner />}
+            <Input
+              id="userName"
+              onChange={handleLoginChange}
+              value={loginData.userName}
             />
-            <span className="flex gap-1 text-sm">
-              <p className=" text-slate-300">Need an account?</p>
-              <Link
-                to="/signup"
-                className="text-bgGreen2 hover:underline cursor-pointer underline-offset-4"
-              >
-                Register
-              </Link>
-            </span>
+            <Input
+              value={loginData.password}
+              id="password"
+              text="Forgot your password?"
+              onChange={handleLoginChange}
+            />
+            <div className="space-y-2">
+              <Button
+                initial={{ scale: !inputError ? 0.97 : 1 }}
+                animate={{ scale: !inputError ? 1 : 1 }}
+                transition={{ duration: 1, type: "spring", bounce: 0.7 }}
+                key={!inputError}
+                title={isLoading ? "Logging In..." : "Log In"}
+                styles={`py-[0.18rem] px-7 text-sm mt-8 w-full rounded-md flex justify-center mx-auto ${
+                  isLoading || inputError ? "opacity-40 cursor-not-allowed" : ""
+                }`}
+                onClick={handleclick}
+                disabled={isLoading || inputError}
+                spinner={isLoading && <Spinner />}
+              />
+              <span className="flex gap-1 text-sm">
+                <p className=" text-slate-300">Need an account?</p>
+                <Link
+                  to="/signup"
+                  onClick={handleNavigation}
+                  className="text-bgGreen2 hover:underline cursor-pointer underline-offset-4"
+                >
+                  Register
+                </Link>
+              </span>
+            </div>
+          </form>
+          <div className="flex justify-center">
+            {isNavigating && <Spinner />}
           </div>
-        </form>
-      </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

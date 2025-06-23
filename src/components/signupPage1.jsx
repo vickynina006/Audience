@@ -41,7 +41,7 @@ export default function SignupPage1({ onClick }) {
           onClick={onClick}
           disabled={!isValid}
           styles={`py-0.5 px-7 rounded-md mt-8 w-full flex justify-center mx-auto ${
-            !isValid ? "opacity-50 cursor-not-allowed" : ""
+            !isValid ? "opacity-40 cursor-not-allowed" : ""
           } `}
         />
         <span className="flex gap-1 text-sm">
