@@ -13,7 +13,7 @@ export default function Button({
     <a href={href}>
       <MotionButton
         {...props}
-        className={`outline outline-1  outline-slate-400 text-white ${styles} ${bg} hover:text-[#c5eee4] hover:outline-[#c5eee4]`}
+        className={`outline outline-1 flex items-center justify-center  outline-slate-400 text-white ${styles} ${bg} hover:text-[#c5eee4] hover:outline-[#c5eee4]`}
       >
         {title}
         {spinner}
