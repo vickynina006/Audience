@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <header
-      className={`flex items-center  justify-between fixed top-0 left-0 right-0 px-8 md:px-16 lgx:px-24 ${
+      className={`flex items-center z-30 justify-between fixed top-0 left-0 right-0 px-8 md:px-16 lgx:px-24 ${
         scrolled ? "bg-bgGreen2/10 py-5 backdrop-blur-md" : "py-10"
       } `}
     >
