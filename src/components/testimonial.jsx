@@ -1,13 +1,26 @@
 import person1 from "../assets/person1.jpeg";
 import person2 from "../assets/person2.jpeg";
+import { motion } from "framer-motion";
 
 export default function Testimonial() {
   return (
     <section className="bg-gradient-to-b from-bgblack space-y-10 to-darkash w-full md:space-y-20 px-10 py-10 lg:px-20">
-      <div className="flex text-xl text-slate-300 justify-center md:text-3xl">
+      <motion.div
+        initial={{ opacity: 0.1 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ amount: 0.7, once: true }}
+        className="flex text-xl text-slate-300 justify-center md:text-3xl"
+      >
         <h1 className="text-center">What Our Customers Are Saying</h1>
-      </div>
-      <div className="flex w-full  min-h-54 flex-shrink-0 gap-10 border-t-[1px] border-t-slate-500 overflow-hidden ">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0.1 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ amount: 0.7, once: true }}
+        className="flex w-full  min-h-54 flex-shrink-0 gap-10 border-t-[1px] border-t-slate-500 overflow-hidden "
+      >
         <div className="w-full  animate-slide flex lg:animate-none">
           {" "}
           <TestimonialDiv
@@ -29,7 +42,7 @@ export default function Testimonial() {
             description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste id accusantium delectus quos, perferendis molestiae maiores reiciendis repellendus exercitationem eum quas iure, asperiores labore atque! Distinctio similique iure ullam commodi!"
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
